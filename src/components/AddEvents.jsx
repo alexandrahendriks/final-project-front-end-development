@@ -19,7 +19,7 @@ export const loader = async () => {
   const users = await fetch("http://localhost:3000/users");
   const categories = await fetch("http://localhost:3000/categories");
 
-  return { users, categories }.json();
+  return users, categories;
 };
 
 export const AddEvents = () => {
