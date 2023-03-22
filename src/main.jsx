@@ -5,7 +5,11 @@ import { EventPage } from "./pages/EventPage";
 import { EventsPage } from "./pages/EventsPage";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Root } from "./components/Root";
-import { AddEvents } from "./components/AddEvents";
+import {
+  AddEvents,
+  loader as addEventsLoader,
+  action as addEvents,
+} from "./components/AddEvents";
 
 const router = createBrowserRouter([
   {
@@ -26,6 +30,9 @@ const router = createBrowserRouter([
       {
         path: "/addevents",
         element: <AddEvents />,
+        loader: addEventsLoader,
+
+        action: addEvents,
       },
     ],
   },

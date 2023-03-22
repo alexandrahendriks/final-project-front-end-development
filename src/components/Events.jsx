@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 export const Events = ({ events, category, title }) => {
   return (
@@ -26,6 +27,7 @@ export const Events = ({ events, category, title }) => {
                     (id) =>
                       category.find((category) => category.id === id)?.name
                   )
+
                   .join(", ")}
               </p>
               <img src={event.image} alt="" width={250} height={250} />
@@ -35,4 +37,12 @@ export const Events = ({ events, category, title }) => {
       })}
     </div>
   );
+};
+
+Events.propTypes = {
+  events: PropTypes.array,
+  category: PropTypes.array,
+  title: PropTypes.string,
+  id: PropTypes.number,
+  event: PropTypes.object,
 };

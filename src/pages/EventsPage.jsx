@@ -1,3 +1,4 @@
+import React from "react";
 import { Heading } from "@chakra-ui/react";
 import { useFetch } from "../useFetch";
 import { Events } from "../components/Events";
@@ -13,7 +14,7 @@ export const EventsPage = () => {
 
   return (
     <>
-      <Heading>List of events!</Heading>
+      <Heading>List of all events!</Heading>
 
       {error && <div>{error}</div>}
       {isLoading && <div>Loading...</div>}
