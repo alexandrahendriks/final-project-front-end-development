@@ -94,19 +94,52 @@
     },
     {
       "createdBy": 1,
-      "title": "swimming",
-      "description": "get wet",
-      "image": "https://www.shutterstock.com/image-vector/birthday-balloons-vector-background-design-600w-2003677130.jpg",
+      "title": "fcgfdsa",
+      "description": "description",
+      "image": "image",
       "categoryIds": [
-        1
-      ],
-      "attendedBy": [
+        1,
         2
       ],
-      "location": "swimming pool",
-      "startTime": "",
-      "endTime": "",
+      "location": "location",
+      "startTime": "startTime",
+      "endTime": "endTime",
       "id": 6
+    },
+    {
+      "createdBy": 2,
+      "title": "Zumba",
+      "description": "description",
+      "image": "image",
+      "categoryIds": [
+        1,
+        2
+      ],
+      "attendedBy": [
+        1,
+        2
+      ],
+      "location": "location",
+      "startTime": "startTime",
+      "endTime": "endTime",
+      "id": 7
+    },
+    {
+      "createdBy": 2,
+      "title": "Zumba",
+      "description": "Dancing",
+      "image": "https://joinfcf.com/wp-content/uploads/2017/08/Zumba.jpg.webp",
+      "categoryIds": [
+        1,
+        2
+      ],
+      "attendedBy": [
+        1,
+        2
+      ],
+      "location": "Anytime Fitness, Elsloo",
+      "endTime": "2023-03-29T21:00",
+      "id": 8
     }
   ],
   "categories": [

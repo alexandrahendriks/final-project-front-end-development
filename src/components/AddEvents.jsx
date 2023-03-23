@@ -1,8 +1,17 @@
-import React, { useState } from "react";
-import { redirect, useLoaderData } from "react-router-dom";
-import { Form } from "react-router-dom";
+import {
+  Button,
+  useToast,
+  Input,
+  FormLabel,
+  Checkbox,
+  Select,
+  Textarea,
+} from "@chakra-ui/react";
+import React from "react";
+import { useLoaderData } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
-export const action = async ({ request }) => {
+/* export const action = async ({ request }) => {
   const formData = await request.formData();
   const submission = {
     createdBy: Number(formData.get("createdBy")),
@@ -23,7 +32,7 @@ export const action = async ({ request }) => {
     .then((res) => res.json())
     .then((json) => json.id);
   return redirect(`event/${newId}`);
-};
+}; */
 
 export const loader = async () => {
   const userResponse = await fetch("http://localhost:3000/users");
@@ -33,9 +42,12 @@ export const loader = async () => {
   return [users, categories];
 };
 
-export const AddEvents = () => {
+/*export const AddEvents = () => {
+  //Loader data from the back-end (users and categories)
   const [users, categories] = useLoaderData();
-  const [categoriesArray, setCategoriesArray] = useState([]);
+
+  // Toast function to display the success message after POST request
+  const toast = useToast();
 
   const handleChange = (e) => {
     setCategoriesArray([]);
@@ -49,77 +61,141 @@ export const AddEvents = () => {
     }
   };
 
-  console.log(categoriesArray);
+
+}; */
+
+export const AddEvents = () => {
+  //Loader data from the back-end (users and categories)
+  const [users, categories] = useLoaderData();
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  //const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    fetch("http://localhost:3000/events", {
+      method: "POST",
+      body: JSON.stringify({
+        createdBy: Number(data.createdBy),
+        title: data.title,
+        description: data.description,
+        image: data.image,
+        categoryIds: data.categoryIds.map((id) => parseInt(id)),
+        attendedBy: data.attendedBy.map((id) => parseInt(id)),
+        location: data.location,
+        startTime: data.startTime,
+        endTime: data.endTime,
+      }),
+      headers: { "Content-type": "application/json" },
+    });
+  };
+  console.log(errors);
+
+  const toast = useToast();
 
   return (
-    <>
-      <div className="form">
-        <Form method="post" id="new-event-form">
-          <label>
-            <span>Title of the event:</span>
-            <input type="text" name="title" />
-          </label>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormLabel>
+        Title of the event:
+        <Input
+          type="text"
+          placeholder="Title"
+          {...register("title", { required: true, min: 3 })}
+        />
+      </FormLabel>
+      <FormLabel>
+        Description of the event:
+        <Textarea
+          //placeholder="Description"
+          {...register("description", {
+            required: true,
+            min: 20,
+            maxLength: 400,
+          })}
+        />
+      </FormLabel>
+      <FormLabel>
+        Image of the event in URL form:
+        <Input type="url" placeholder="Image URL" {...register("image", {})} />
+      </FormLabel>
+      <FormLabel>
+        Location of the event:
+        <Input
+          type="text"
+          placeholder="Location"
+          {...register("location", { required: true })}
+        />
+      </FormLabel>
+      <FormLabel>
+        Start time:
+        <Input
+          type="datetime-local"
+          placeholder="Start Time"
+          {...register("startTime", { required: true })}
+        />
+      </FormLabel>
+      <FormLabel>
+        End time:
+        <Input
+          type="datetime-local"
+          placeholder="End Time"
+          {...register("endTime", { required: true })}
+        />
+      </FormLabel>
 
-          <label>
-            <span>Event description:</span>
-            <textarea rows={6} maxLength={400} name="description" />
-          </label>
-          <fieldset>
-            <label>
-              <span>Catgeories:</span>
-              {categories.map(({ name, id }) => (
-                <label key={id}>
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
-                  <input
-                    type="checkbox"
-                    id={id}
-                    value={id}
-                    name="categoryIds"
-                    onChange={handleChange}
-                  />
-                </label>
-              ))}
-            </label>
-          </fieldset>
-          <label>
-            <span>Upload image URL:</span>
-            <input type="url" name="image" />
-          </label>
-
-          <label>
-            <span>Attended by</span>
-            <select name="attendedBy">
-              {users.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <label>
-            <span>Location:</span>
-            <input type="text" name="location" />
-          </label>
-
-          <label>
-            <span>Start time:</span>
-            <input type="datetime-local" name="startTime" />
-            <span>End time:</span>
-            <input type="datetime-local" name="endTime" />
-          </label>
-          <label>
-            <span>Created by:</span>
-            <select name="createdBy">
-              {users.map((user) => (
-                <option key={user.id} value={user.id}>
-                  {user.name}
-                </option>
-              ))}
-            </select>
-          </label>
-          <button>Add event!</button>
-        </Form>
-      </div>
-    </>
+      <FormLabel>
+        Catgeories:
+        {categories.map(({ name, id }) => (
+          <FormLabel key={id}>
+            {name.charAt(0).toUpperCase() + name.slice(1)}
+            <Checkbox
+              type="checkbox"
+              id={id}
+              value={id}
+              {...register("categoryIds", { required: true })}
+            />
+          </FormLabel>
+        ))}
+      </FormLabel>
+      <FormLabel>
+        Attended by:
+        {users.map(({ name, id }) => (
+          <FormLabel key={id}>
+            {name}
+            <Checkbox
+              type="checkbox"
+              id={id}
+              value={id}
+              {...register("attendedBy", {})}
+            />
+          </FormLabel>
+        ))}
+      </FormLabel>
+      <FormLabel>Created by:</FormLabel>
+      <Select {...register("createdBy")}>
+        {users.map((user) => (
+          <option key={user.id} value={user.id}>
+            {user.name}
+          </option>
+        ))}
+      </Select>
+      <Button
+        type="submit"
+        onClick={() =>
+          toast({
+            title: "Event added",
+            description: "we have successfully created the event for you!",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          })
+        }
+      >
+        Add event
+      </Button>
+    </form>
   );
 };
