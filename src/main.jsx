@@ -31,7 +31,6 @@ const router = createBrowserRouter([
         path: "/addevents",
         element: <AddEvents />,
         loader: addEventsLoader,
-
         action: addEvents,
       },
     ],
