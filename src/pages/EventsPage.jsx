@@ -1,7 +1,7 @@
 import React from "react";
 import { Heading } from "@chakra-ui/react";
 import { useFetch } from "../useFetch";
-import { Events } from "../components/Events";
+import { SearchBar } from "../components/SearchBar";
 
 export const EventsPage = () => {
   const {
@@ -19,11 +19,15 @@ export const EventsPage = () => {
       {error && <div>{error}</div>}
       {isLoading && <div>Loading...</div>}
       {events && (
-        <Events
-          events={events}
-          category={category}
-          title="List of all events!"
-        />
+        <>
+          <SearchBar events={events} category={category} />
+
+          {/* <Events
+            events={events}
+            category={category}
+            title="List of all events!"
+          /> */}
+        </>
       )}
     </>
   );

@@ -2,10 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
-export const Events = ({ events, category, title }) => {
+export const Events = ({ events, category }) => {
   return (
     <div>
-      <h1>{title}</h1>
       {events.map((event) => {
         return (
           <div key={event.id}>
