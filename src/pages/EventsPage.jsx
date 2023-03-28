@@ -18,11 +18,7 @@ export const EventsPage = () => {
 
       {error && <div>{error}</div>}
       {isLoading && <div>Loading...</div>}
-      {events && (
-        <>
-          <Filter events={events} category={category} />
-        </>
-      )}
+      {events && <Filter events={events} category={category} />}
     </>
   );
 };
