@@ -37,7 +37,12 @@ export const EventPage = () => {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Edit your event!</ModalHeader>
-          <EditForm event={event} category={categories} users={users} />
+          <EditForm
+            event={event}
+            category={categories}
+            users={users}
+            onClose={onClose}
+          />
         </ModalContent>
       </Modal>
     </>

@@ -46,8 +46,8 @@ export const AddEvents = () => {
         categoryIds: data.categoryIds.map((id) => parseInt(id)),
         attendedBy: data.attendedBy.map((id) => parseInt(id)),
         location: data.location,
-        startTime: data.startTime,
-        endTime: data.endTime,
+        startTime: data.startTime + ":00.000Z",
+        endTime: data.endTime + ":00.000Z",
       }),
       headers: { "Content-type": "application/json" },
     }).then(() => {
@@ -157,7 +157,7 @@ export const AddEvents = () => {
             onClick={() =>
               toast({
                 title: "Event added",
-                description: "we have successfully created the event for you!",
+                description: "We have successfully created the event for you!",
                 status: "success",
                 duration: 9000,
                 isClosable: true,

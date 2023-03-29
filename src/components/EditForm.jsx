@@ -5,86 +5,96 @@ import {
   Select,
   Textarea,
   Checkbox,
+  useToast,
+  Divider,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-export const EditForm = ({ event, category, users }) => {
+export const EditForm = ({ event, category, users, onClose }) => {
+  const [userEvent, setUserEvent] = useState(event);
   const [isPending, setIsPending] = useState(false);
-  const { register, handleSubmit } = useForm();
+
+  const toast = useToast();
   const history = useNavigate();
 
-  const onSubmit = async (data) => {
-    setIsPending(true);
-    await fetch("http://localhost:3000/events", {
-      method: "POST",
-      body: JSON.stringify({
-        createdBy: Number(data.createdBy),
-        title: data.title,
-        description: data.description,
-        image: data.image,
-        categoryIds: data.categoryIds.map((id) => parseInt(id)),
-        attendedBy: data.attendedBy.map((id) => parseInt(id)),
-        location: data.location,
-        startTime: data.startTime,
-        endTime: data.endTime,
-      }),
-      headers: { "Content-type": "application/json" },
-    }).then(() => {
-      setIsPending(false);
-      history("/");
-    });
+  //console.log(event);
+
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
+  const handleChange = (e) => {
+    console.log(e.target.value);
+  };
+
+  console.log(userEvent.categoryIds);
   return (
-    <form>
+    <form onSubmit={() => onSubmit}>
       <FormLabel>
         Title of the event:
         <Input
           type="text"
-          placeholder={event.title}
-          contentEditable={true}
-          {...register("title", { required: true, min: 3 })}
+          value={userEvent.title}
+          onChange={(e) => {
+            setUserEvent({ ...userEvent, title: e.target.value });
+          }}
         />
       </FormLabel>
       <FormLabel>
         Description of the event:
         <Textarea
-          //placeholder="Description"
-          {...register("description", {
-            required: true,
-            min: 20,
-            maxLength: 400,
-          })}
+          value={userEvent.description}
+          onChange={(e) => {
+            setUserEvent({ ...userEvent, description: e.target.value });
+          }}
         />
       </FormLabel>
       <FormLabel>
         Image of the event in URL form:
-        <Input type="url" placeholder="Image URL" {...register("image", {})} />
+        <Input
+          type="url"
+          value={userEvent.image}
+          onChange={(e) => {
+            setUserEvent({ ...userEvent, image: e.target.value });
+          }}
+        />
       </FormLabel>
       <FormLabel>
         Location of the event:
         <Input
           type="text"
           placeholder="Location"
-          {...register("location", { required: true })}
+          value={userEvent.location}
+          onChange={(e) => {
+            setUserEvent({ ...userEvent, location: e.target.value });
+          }}
         />
       </FormLabel>
       <FormLabel>
         Start time:
         <Input
           type="datetime-local"
-          placeholder="Start Time"
-          {...register("startTime", { required: true })}
+          value={new Date(userEvent.startTime).toISOString().slice(0, 16)}
+          onChange={(e) => {
+            setUserEvent({
+              ...userEvent,
+              startTime: e.target.value + ":00.000Z",
+            });
+          }}
         />
       </FormLabel>
       <FormLabel>
         End time:
         <Input
           type="datetime-local"
-          placeholder="End Time"
-          {...register("endTime", { required: true })}
+          value={new Date(userEvent.endTime).toISOString().slice(0, 16)}
+          onChange={(e) => {
+            setUserEvent({
+              ...userEvent,
+              endTime: e.target.value,
+            });
+          }}
         />
       </FormLabel>
 
@@ -95,35 +105,29 @@ export const EditForm = ({ event, category, users }) => {
             {name.charAt(0).toUpperCase() + name.slice(1)}
             <Checkbox
               type="checkbox"
-              id={id}
+              name={name}
               value={id}
-              {...register("categoryIds", { required: true })}
+              defaultChecked={userEvent.categoryIds.includes(id)}
             />
           </FormLabel>
         ))}
       </FormLabel>
-      <FormLabel>
-        Attended by:
-        {users.map(({ name, id }) => (
-          <FormLabel key={id}>
-            {name}
-            <Checkbox
-              type="checkbox"
-              id={id}
-              value={id}
-              {...register("attendedBy", {})}
-            />
-          </FormLabel>
-        ))}
-      </FormLabel>
-      <FormLabel>Created by:</FormLabel>
-      <Select {...register("createdBy")}>
-        {users.map((user) => (
-          <option key={user.id} value={user.id}>
-            {user.name}
-          </option>
-        ))}
-      </Select>
+
+      <Button
+        type="submit"
+        onClick={() =>
+          toast({
+            title: "Event added",
+            description: "We have successfully updated the event for you!",
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          })
+        }
+      >
+        Save
+      </Button>
+      <Button onClick={onClose}>Close</Button>
     </form>
   );
 };
