@@ -2,11 +2,9 @@ import {
   FormLabel,
   Input,
   Button,
-  Select,
   Textarea,
   Checkbox,
   useToast,
-  Divider,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -25,10 +23,17 @@ export const EditForm = ({ event, category, users, onClose }) => {
   };
 
   const handleChange = (e) => {
-    console.log(e.target.value);
+    const { value, checked } = e.target;
+    const categories = userEvent.categoryIds;
+
+    console.log(`${value} is ${checked}`);
+    console.log(categories);
+    if (checked) {
+      console.log(value);
+    }
   };
 
-  console.log(userEvent.categoryIds);
+  console.log(userEvent);
   return (
     <form onSubmit={() => onSubmit}>
       <FormLabel>
@@ -79,7 +84,7 @@ export const EditForm = ({ event, category, users, onClose }) => {
           onChange={(e) => {
             setUserEvent({
               ...userEvent,
-              startTime: e.target.value + ":00.000Z",
+              startTime: e.target.value,
             });
           }}
         />
@@ -108,6 +113,7 @@ export const EditForm = ({ event, category, users, onClose }) => {
               name={name}
               value={id}
               defaultChecked={userEvent.categoryIds.includes(id)}
+              onChange={handleChange}
             />
           </FormLabel>
         ))}
