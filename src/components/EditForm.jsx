@@ -12,12 +12,8 @@ import { useNavigate } from "react-router-dom";
 export const EditForm = ({ event, category, users, onClose }) => {
   const [userEvent, setUserEvent] = useState(event);
   const [isPending, setIsPending] = useState(false);
-
   const toast = useToast();
   const history = useNavigate();
-
-  //console.log(event);
-
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -26,7 +22,7 @@ export const EditForm = ({ event, category, users, onClose }) => {
     const { value, checked } = e.target;
     const categoryIds = userEvent.categoryIds;
 
-    const valueExist = userEvent.categoryIds.includes(Number(value));
+    const valueExist = categoryIds.includes(Number(value));
 
     if (checked && !valueExist) {
       categoryIds.push(Number(value));
@@ -38,8 +34,8 @@ export const EditForm = ({ event, category, users, onClose }) => {
 
       setUserEvent({ ...userEvent, categoryIds: filteredArray });
     }
-
-    /* if (!checked && valueExist) {
+  };
+  /* if (!checked && valueExist) {
       const filterOut = userEvent.categoryIds.filter(
         (id) => id !== Number(value)
       );
@@ -47,7 +43,6 @@ export const EditForm = ({ event, category, users, onClose }) => {
     } else {
       categoryIds.push(Number(value));
     } */
-  };
 
   // console.log(userEvent);
   return (
