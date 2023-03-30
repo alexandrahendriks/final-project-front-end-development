@@ -24,16 +24,32 @@ export const EditForm = ({ event, category, users, onClose }) => {
 
   const handleChange = (e) => {
     const { value, checked } = e.target;
-    const categories = userEvent.categoryIds;
+    const categoryIds = userEvent.categoryIds;
 
-    console.log(`${value} is ${checked}`);
-    console.log(categories);
-    if (checked) {
-      console.log(value);
+    const valueExist = userEvent.categoryIds.includes(Number(value));
+
+    if (checked && !valueExist) {
+      categoryIds.push(Number(value));
+      //console.log(categoryIds);
+    } else {
+      const filteredArray = categoryIds.filter((id) => {
+        id == value;
+      });
+
+      setUserEvent({ ...userEvent, categoryIds: filteredArray });
     }
+
+    /* if (!checked && valueExist) {
+      const filterOut = userEvent.categoryIds.filter(
+        (id) => id !== Number(value)
+      );
+      setUserEvent({ ...userEvent, categoryIds: filterOut });
+    } else {
+      categoryIds.push(Number(value));
+    } */
   };
 
-  console.log(userEvent);
+  // console.log(userEvent);
   return (
     <form onSubmit={() => onSubmit}>
       <FormLabel>
