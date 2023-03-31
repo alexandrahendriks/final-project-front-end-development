@@ -31,7 +31,6 @@ export const EditForm = ({ event, category, users, onClose }) => {
   const handleClick = (e) => {
     const { value, checked } = e.target;
     const categoryIds = userEvent.categoryIds;
-
     if (checked) {
       const valueExist = categoryIds.includes(Number(value));
       if (!valueExist) {
@@ -39,15 +38,13 @@ export const EditForm = ({ event, category, users, onClose }) => {
         setUserEvent({ ...userEvent, categoryIds: categoryIds });
       }
     } else {
-      const filteredArray = categoryIds.filter((id) => {
-        return id === Number(value);
+      setUserEvent({
+        ...userEvent,
+        categoryIds: categoryIds.filter((id) => Number(value) !== id),
       });
-      console.log(filteredArray);
-      setUserEvent({ ...userEvent, categoryIds: categoryIds });
     }
-    console.log(userEvent);
   };
-
+  console.log(userEvent);
   //Handlechange function for the input fields
   const handleChange = (e) => {
     setUserEvent({ ...userEvent, [e.target.name]: e.target.value });
@@ -113,8 +110,8 @@ export const EditForm = ({ event, category, users, onClose }) => {
               type="checkbox"
               name={name}
               value={id}
-              defaultChecked={userEvent.categoryIds.includes(id)}
-              onChange={(e) => handleClick(e)}
+              defaultChecked={event.categoryIds.includes(id)}
+              onChange={handleClick}
             />
           </FormLabel>
         ))}
