@@ -18,8 +18,7 @@
       "description": "Bounce around with your friends",
       "image": "https://i.pinimg.com/736x/3d/2f/af/3d2faf4e3188d34a9fcdc00df59e77b0.jpg",
       "categoryIds": [
-        2,
-        1
+        2
       ],
       "attendedBy": [
         1
@@ -76,41 +75,6 @@
       "location": "Shavasana Yoga School",
       "startTime": "2023-03-09T06:00:00.000Z",
       "endTime": "2023-03-09T07:00:00.000Z"
-    },
-    {
-      "createdBy": 2,
-      "title": "Zumba",
-      "description": "Having some fun and dancing ",
-      "image": "https://joinfcf.com/wp-content/uploads/2017/08/Zumba.jpg.webp",
-      "categoryIds": [
-        1,
-        2
-      ],
-      "attendedBy": [
-        1,
-        2
-      ],
-      "location": "Anytime Fitness, Elsloo",
-      "startTime": "2023-03-29T20:00:00.000Z",
-      "endTime": "2023-03-29T21:00:00.000Z",
-      "id": 8
-    },
-    {
-      "createdBy": 2,
-      "title": "Just an other event",
-      "description": "Do whatever you like",
-      "image": "https://www.shutterstock.com/image-vector/birthday-balloons-vector-background-design-600w-2003677130.jpg",
-      "categoryIds": [
-        2,
-        1
-      ],
-      "attendedBy": [
-        2
-      ],
-      "location": "My homeeee",
-      "startTime": "2023-03-26T08:50:00.000Z",
-      "endTime": "2023-03-30T18:50:00.000Z",
-      "id": 9
     }
   ],
   "categories": [
