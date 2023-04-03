@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+//Fetch function for EventsPage
 export const useFetch = (url) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

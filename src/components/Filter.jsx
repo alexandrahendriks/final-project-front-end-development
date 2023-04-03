@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { FormLabel, Input, Button } from "@chakra-ui/react";
+import { FormLabel, Input, Button, Flex } from "@chakra-ui/react";
 import { Events } from "./Events";
 
 export const Filter = ({ events, category }) => {
+  //State for the searchfield
   const [searchField, setSearchField] = useState("");
 
   // Filter function and event handler for the searchbar and categories filter
@@ -14,30 +15,69 @@ export const Filter = ({ events, category }) => {
     );
   });
 
+  // Setting value for the input
   const handleChange = (event) => {
     setSearchField(event.target.value);
   };
 
   return (
     <>
-      <Input
-        backgroundColor="white"
-        mb={{ base: "30px", md: "40px" }}
-        ml="5px"
-        width={{ base: "300px", md: "400px" }}
-        type="text"
-        placeholder="Search here for recipe"
-        onChange={handleChange}
-      />
-      <FormLabel>
-        Filter on category:
-        {category.map(({ name, id }) => (
-          <Button key={id} value={id} onClick={handleChange}>
-            {name.charAt(0).toUpperCase() + name.slice(1)}
-          </Button>
-        ))}
-      </FormLabel>
-      <Events events={matchedEvents} category={category} />
+      <Flex
+        flexDirection={"column"}
+        wrap="wrap"
+        alignItems={"center"}
+        justify={"center"}
+      >
+        <Input
+          backgroundColor="white"
+          colorScheme="whatsapp"
+          focusBorderColor="#38A169"
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"center"}
+          p="0"
+          mb={{ base: "30px", md: "35px" }}
+          ml="5px"
+          width={{ base: "300px", sm: "350px", md: "400px" }}
+          type="text"
+          placeholder="Search here for events"
+          onChange={handleChange}
+        />
+
+        <FormLabel
+          display={"flex"}
+          flexDirection={"column"}
+          alignItems={"center"}
+          justifyContent={"space-around"}
+          mb={{ base: "20px" }}
+          rowGap={4}
+          color="#2F855A"
+          fontSize={{ base: "25px", sm: "30px" }}
+          fontFamily={"Times new roman"}
+        >
+          Filter on category:
+          <Flex
+            display={"flex"}
+            flexDirection={"row"}
+            justifyContent={"space-around"}
+            columnGap={5}
+          >
+            {category.map(({ name, id }) => (
+              <Button
+                key={id}
+                value={id}
+                onClick={handleChange}
+                color="white"
+                background="#38A169"
+              >
+                {name.charAt(0).toUpperCase() + name.slice(1)}
+              </Button>
+            ))}
+          </Flex>
+        </FormLabel>
+
+        <Events events={matchedEvents} category={category} />
+      </Flex>
     </>
   );
 };
