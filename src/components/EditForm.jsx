@@ -10,14 +10,6 @@ import {
 import React, { useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 
-/* export const action = async ({ params, request }) => {
-  const formData = Object.fromEntries(await request.formData());
-  const newId = await fetch(`http://localhost:3000/events/${params.eventId}`, {
-    method: "PUT",
-    body: 
-  })
-};
- */
 export const loader = async ({ params }) => {
   const eventResponse = await fetch(
     `http://localhost:3000/events/${params.eventId}`
