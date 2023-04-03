@@ -7,7 +7,7 @@ export const Event = ({ event, category, users }) => {
   });
 
   //console.log(userId);
-  //console.log(event.createdBy);
+  console.log(event);
   // console.log(users);
   return (
     <>

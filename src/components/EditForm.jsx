@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   FormLabel,
   Input,
@@ -7,27 +8,72 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useLoaderData, useNavigate } from "react-router-dom";
 
-export const EditForm = ({ event, category, users, onClose }) => {
-  const [userEvent, setUserEvent] = useState({
-    id: event.id,
-    createdBy: event.createdBy,
-    title: event.title,
-    description: event.description,
-    image: event.image,
-    categoryIds: event.categoryIds,
-    attendedBy: event.attendedBy,
-    location: event.location,
-    startTime: event.startTime,
-    endTime: event.endTime,
-  });
+/* export const action = async ({ params, request }) => {
+  const formData = Object.fromEntries(await request.formData());
+  const newId = await fetch(`http://localhost:3000/events/${params.eventId}`, {
+    method: "PUT",
+    body: 
+  })
+};
+ */
+export const loader = async ({ params }) => {
+  const eventResponse = await fetch(
+    `http://localhost:3000/events/${params.eventId}`
+  );
+  const event = await eventResponse.json();
+  const categoriesResponse = await fetch("http://localhost:3000/categories");
+  const categories = await categoriesResponse.json();
+  const usersResponse = await fetch("http://localhost:3000/users");
+  const users = await usersResponse.json();
+
+  return [event, categories, users];
+};
+
+export const EditForm = () => {
+  const [event, categories, users] = useLoaderData();
+  const [userEvent, setUserEvent] = useState(event);
   const [isPending, setIsPending] = useState(false);
   const toast = useToast();
   const history = useNavigate();
-  const onSubmit = (data) => {
-    console.log(data);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsPending(true);
+    console.log(userEvent);
+    const response = await fetch(
+      `http://localhost:3000/evens/` + userEvent.id,
+      {
+        method: "PUT",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(userEvent),
+      }
+    );
+    if (response.ok) {
+      setIsPending(false);
+      toast({
+        title: "Event updated",
+        description: "We have successfully edited the event for you!",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "top",
+      });
+      history(`/event/${userEvent.id}`);
+    } else {
+      toast({
+        title: "Event updated",
+        description: "Something went wrong!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+      setIsPending(false);
+    }
   };
+
   const handleClick = (e) => {
     const { value, checked } = e.target;
     const categoryIds = userEvent.categoryIds;
@@ -44,7 +90,7 @@ export const EditForm = ({ event, category, users, onClose }) => {
       });
     }
   };
-  console.log(userEvent);
+
   //Handlechange function for the input fields
   const handleChange = (e) => {
     setUserEvent({ ...userEvent, [e.target.name]: e.target.value });
@@ -52,7 +98,7 @@ export const EditForm = ({ event, category, users, onClose }) => {
   };
 
   return (
-    <form onSubmit={() => onSubmit}>
+    <form onSubmit={handleSubmit}>
       <FormLabel>
         Title of the event:
         <Input name="title" value={userEvent.title} onChange={handleChange} />
@@ -103,7 +149,7 @@ export const EditForm = ({ event, category, users, onClose }) => {
 
       <FormLabel>
         Catgeories:
-        {category.map(({ name, id }) => (
+        {categories.map(({ name, id }) => (
           <FormLabel key={id}>
             {name.charAt(0).toUpperCase() + name.slice(1)}
             <Checkbox
@@ -116,22 +162,15 @@ export const EditForm = ({ event, category, users, onClose }) => {
           </FormLabel>
         ))}
       </FormLabel>
+      {isPending ? (
+        <Button disabled>Saving event...</Button>
+      ) : (
+        <Button type="submit">Save</Button>
+      )}
 
-      <Button
-        type="submit"
-        onClick={() =>
-          toast({
-            title: "Event added",
-            description: "We have successfully updated the event for you!",
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          })
-        }
-      >
-        Save
-      </Button>
-      <Button onClick={onClose}>Close</Button>
+      <Link to={`/event/${event.id}`}>
+        <Button>Back</Button>
+      </Link>
     </form>
   );
 };

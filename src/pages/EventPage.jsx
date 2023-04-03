@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Button,
   Modal,
@@ -5,9 +6,14 @@ import {
   useDisclosure,
   ModalOverlay,
   ModalContent,
+  FormLabel,
+  Checkbox,
+  Input,
+  useToast,
+  Textarea,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import { EditForm } from "../components/EditForm";
 import { Event } from "../components/Event";
 
@@ -26,25 +32,13 @@ export const loader = async ({ params }) => {
 
 export const EventPage = () => {
   const [event, categories, users] = useLoaderData();
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
       <Event event={event} category={categories} users={users} />
-      <Button onClick={onOpen}>Edit event</Button>
-
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Edit your event!</ModalHeader>
-          <EditForm
-            event={event}
-            category={categories}
-            users={users}
-            onClose={onClose}
-          />
-        </ModalContent>
-      </Modal>
+      <Link to={`/event/${event.id}/editevent`}>
+        <Button>Edit event</Button>
+      </Link>
     </>
   );
 };
