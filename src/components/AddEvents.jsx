@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   Button,
   useToast,
@@ -6,6 +7,9 @@ import {
   Checkbox,
   Select,
   Textarea,
+  Center,
+  Heading,
+  Flex,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
@@ -55,119 +59,217 @@ export const AddEvents = () => {
       history("/");
     });
   };
+
   // useToast declaration for pop up message
   const toast = useToast();
 
   return (
     <>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <FormLabel>
-          Title of the event:
-          <Input
-            type="text"
-            placeholder="Title"
-            {...register("title", { required: true, min: 3 })}
-          />
-        </FormLabel>
-        <FormLabel>
-          Description of the event:
-          <Textarea
-            //placeholder="Description"
-            {...register("description", {
-              required: true,
-              min: 20,
-              maxLength: 400,
-            })}
-          />
-        </FormLabel>
-        <FormLabel>
-          Image of the event in URL form:
-          <Input
-            type="url"
-            placeholder="Image URL"
-            {...register("image", {})}
-          />
-        </FormLabel>
-        <FormLabel>
-          Location of the event:
-          <Input
-            type="text"
-            placeholder="Location"
-            {...register("location", { required: true })}
-          />
-        </FormLabel>
-        <FormLabel>
-          Start time:
-          <Input
-            type="datetime-local"
-            placeholder="Start Time"
-            {...register("startTime", { required: true })}
-          />
-        </FormLabel>
-        <FormLabel>
-          End time:
-          <Input
-            type="datetime-local"
-            placeholder="End Time"
-            {...register("endTime", { required: true })}
-          />
-        </FormLabel>
-
-        <FormLabel>
-          Catgeories:
-          {categories.map(({ name, id }) => (
-            <FormLabel key={id}>
-              {name.charAt(0).toUpperCase() + name.slice(1)}
-              <Checkbox
-                type="checkbox"
-                id={id}
-                value={id}
-                {...register("categoryIds", { required: true })}
-              />
-            </FormLabel>
-          ))}
-        </FormLabel>
-        <FormLabel>
-          Attended by:
-          {users.map(({ name, id }) => (
-            <FormLabel key={id}>
-              {name}
-              <Checkbox
-                type="checkbox"
-                id={id}
-                value={id}
-                {...register("attendedBy", {})}
-              />
-            </FormLabel>
-          ))}
-        </FormLabel>
-        <FormLabel>Created by:</FormLabel>
-        <Select {...register("createdBy")}>
-          {users.map((user) => (
-            <option key={user.id} value={user.id}>
-              {user.name}
-            </option>
-          ))}
-        </Select>
-        {isPending ? (
-          <Button disabled>Adding event...</Button>
-        ) : (
-          <Button
-            type="submit"
-            onClick={() =>
-              toast({
-                title: "Event added",
-                description: "We have successfully created the event for you!",
-                status: "success",
-                duration: 9000,
-                isClosable: true,
-              })
-            }
+      <Center display={"flex"} flexDirection={"column"} ml={{ base: "10px" }}>
+        <Heading
+          mb="40px"
+          mt="30px"
+          color="#2F855A"
+          fontSize={{ base: "30px", md: "50px", xl: "60px" }}
+          fontFamily={"Times new roman"}
+        >
+          Add a new event
+        </Heading>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
           >
-            Add event
-          </Button>
-        )}
-      </form>
+            Title of the event:
+            <Input
+              mt={{ base: "10px" }}
+              backgroundColor="white"
+              focusBorderColor="#38A169"
+              type="text"
+              {...register("title", { required: true, min: 3 })}
+            />
+          </FormLabel>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            Description of the event:
+            <Textarea
+              mt={{ base: "10px" }}
+              backgroundColor="white"
+              colorScheme="whatsapp"
+              focusBorderColor="#38A169"
+              {...register("description", {
+                required: true,
+                min: 20,
+                maxLength: 400,
+              })}
+            />
+          </FormLabel>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            Image of the event in URL form:
+            <Input
+              mt={{ base: "10px" }}
+              backgroundColor="white"
+              colorScheme="whatsapp"
+              focusBorderColor="#38A169"
+              type="url"
+              {...register("image", {})}
+            />
+          </FormLabel>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            Location of the event:
+            <Input
+              mt={{ base: "10px" }}
+              backgroundColor="white"
+              colorScheme="whatsapp"
+              focusBorderColor="#38A169"
+              type="text"
+              {...register("location", { required: true })}
+            />
+          </FormLabel>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            Start time:
+            <Input
+              mt={{ base: "10px" }}
+              color="black"
+              backgroundColor="white"
+              focusBorderColor="#38A169"
+              type="datetime-local"
+              {...register("startTime", { required: true })}
+            />
+          </FormLabel>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            End time:
+            <Input
+              mt={{ base: "10px" }}
+              color="black"
+              backgroundColor="white"
+              focusBorderColor="#38A169"
+              type="datetime-local"
+              {...register("endTime", { required: true })}
+            />
+          </FormLabel>
+
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            Catgeories:
+            <Flex mt={{ base: "10px" }}>
+              {categories.map(({ name, id }) => (
+                <FormLabel color="#2F855A" fontSize={{ base: "17px" }} key={id}>
+                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                  <Checkbox
+                    ml={"10px"}
+                    mt={"5px"}
+                    backgroundColor="white"
+                    colorScheme="whatsapp"
+                    type="checkbox"
+                    id={id}
+                    value={id}
+                    {...register("categoryIds", { required: true })}
+                  />
+                </FormLabel>
+              ))}
+            </Flex>
+          </FormLabel>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            Attended by:
+            <Flex mt={{ base: "10px" }}>
+              {users.map(({ name, id }) => (
+                <FormLabel color="#2F855A" fontSize={{ base: "17px" }} key={id}>
+                  {name}
+                  <Checkbox
+                    ml={"10px"}
+                    mt={"5px"}
+                    backgroundColor="white"
+                    colorScheme="whatsapp"
+                    type="checkbox"
+                    id={id}
+                    value={id}
+                    {...register("attendedBy", {})}
+                  />
+                </FormLabel>
+              ))}
+            </Flex>
+          </FormLabel>
+          <FormLabel
+            mb={{ base: "20px" }}
+            fontSize={{ base: "20px" }}
+            color="#2F855A"
+          >
+            Created by:
+            <Select
+              mt={{ base: "10px" }}
+              color="black"
+              backgroundColor="white"
+              focusBorderColor="#38A169"
+              {...register("createdBy")}
+            >
+              {users.map((user) => (
+                <option key={user.id} value={user.id}>
+                  {user.name}
+                </option>
+              ))}
+            </Select>
+          </FormLabel>
+
+          {isPending ? (
+            <Button
+              disabled
+              color="white"
+              background="#38A169"
+              mb={{ base: "20px" }}
+            >
+              Adding event...
+            </Button>
+          ) : (
+            <Button
+              type="submit"
+              onClick={() =>
+                toast({
+                  title: "Event added",
+                  description:
+                    "We have successfully created the event for you!",
+                  status: "success",
+                  duration: 9000,
+                  isClosable: true,
+                  position: "top",
+                })
+              }
+              color="white"
+              background="#38A169"
+              mb={{ base: "20px" }}
+            >
+              Add event
+            </Button>
+          )}
+        </form>
+      </Center>
     </>
   );
 };

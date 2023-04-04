@@ -22,16 +22,16 @@ export const EventsPage = () => {
   return (
     <>
       <Heading
-        textAlign={"center"}
+        textAlign="center"
         mb={{ base: "30px" }}
         mt={{ base: "30px" }}
         color="#2F855A"
-        fontSize={{ base: "40px" }}
+        fontSize={{ base: "40px", md: "50px", xl: "60px" }}
         fontFamily={("Times new roman", "serif")}
       >
         All events
       </Heading>
-      {event && <Filter events={event} category={categories} />}
+      <Filter events={event} category={categories} />
     </>
   );
 };

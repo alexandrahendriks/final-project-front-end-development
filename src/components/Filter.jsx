@@ -23,19 +23,18 @@ export const Filter = ({ events, category }) => {
   return (
     <>
       <Flex
-        flexDirection={"column"}
+        flexDirection="column"
         wrap="wrap"
-        alignItems={"center"}
-        justify={"center"}
+        alignItems="center"
+        justify="center"
       >
         <Input
           backgroundColor="white"
-          colorScheme="whatsapp"
           focusBorderColor="#38A169"
-          display={"flex"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          p="0"
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          p="10px"
           mb={{ base: "30px", md: "35px" }}
           ml="5px"
           width={{ base: "300px", sm: "350px", md: "400px" }}
@@ -45,23 +44,17 @@ export const Filter = ({ events, category }) => {
         />
 
         <FormLabel
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"center"}
-          justifyContent={"space-around"}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
           mb={{ base: "20px" }}
           rowGap={4}
           color="#2F855A"
           fontSize={{ base: "25px", sm: "30px" }}
-          fontFamily={"Times new roman"}
+          fontFamily="Times new roman"
         >
           Filter on category:
-          <Flex
-            display={"flex"}
-            flexDirection={"row"}
-            justifyContent={"space-around"}
-            columnGap={5}
-          >
+          <Flex display="flex" flexDirection="row" columnGap={5}>
             {category.map(({ name, id }) => (
               <Button
                 key={id}

@@ -36,9 +36,9 @@ export const Events = ({ events, category }) => {
           >
             <Link to={`/event/${event.id}`}>
               <Box
-                display={"flex"}
-                flexDirection={"column"}
-                alignItems={"center"}
+                display="flex"
+                flexDirection="column"
+                alignItems="center"
                 rowGap={2}
               >
                 <Image
@@ -52,7 +52,6 @@ export const Events = ({ events, category }) => {
                   {event.title}
                 </Heading>
                 <Text>{event.description}</Text>
-
                 <Box>
                   Start Time: {event.startTime.substring(0, 10)}{" "}
                   {event.startTime.substring(11, 16)}
@@ -61,16 +60,28 @@ export const Events = ({ events, category }) => {
                   End Time: {event.endTime.substring(0, 10)}{" "}
                   {event.endTime.substring(11, 16)}
                 </Box>
-                <Badge>
-                  {" "}
-                  {event.categoryIds
-                    .map(
-                      (id) =>
-                        category.find((category) => category.id === id)?.name
-                    )
-
-                    .join(", ")}
-                </Badge>
+                <Box
+                  display="flex"
+                  flexDirection="row"
+                  columnGap="10px"
+                  mb="10px"
+                  mt="5px"
+                >
+                  {event.categoryIds.map((id) => {
+                    return (
+                      <Badge
+                        key={id}
+                        mb={{ base: "10px" }}
+                        p="5px"
+                        backgroundColor="#9AE6B4"
+                        borderBottomRadius="3px"
+                        borderTopRadius="3px"
+                      >
+                        {category.find((category) => category.id === id)?.name}
+                      </Badge>
+                    );
+                  })}
+                </Box>
               </Box>
             </Link>
           </Flex>
