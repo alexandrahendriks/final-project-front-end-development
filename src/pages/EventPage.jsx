@@ -18,14 +18,13 @@ import { Event } from "../components/Event";
 
 //Data loader
 export const loader = async ({ params }) => {
-  const eventResponse = await fetch(
-    `http://localhost:3000/events/${params.eventId}`
-  );
-  const event = await eventResponse.json();
-  const categoriesResponse = await fetch("http://localhost:3000/categories");
-  const categories = await categoriesResponse.json();
-  const usersResponse = await fetch("http://localhost:3000/users");
-  const users = await usersResponse.json();
+  const event = await (
+    await fetch(`http://localhost:3000/events/${params.eventId}`)
+  ).json();
+  const categories = await (
+    await fetch("http://localhost:3000/categories")
+  ).json();
+  const users = await (await fetch("http://localhost:3000/users")).json();
 
   return [event, categories, users];
 };

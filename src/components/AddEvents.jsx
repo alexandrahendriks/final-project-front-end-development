@@ -18,10 +18,11 @@ import { useForm } from "react-hook-form";
 
 // loader function to get users and categories data for the form
 export const loader = async () => {
-  const userResponse = await fetch("http://localhost:3000/users");
-  const users = await userResponse.json();
-  const categoriesResponse = await fetch("http://localhost:3000/categories");
-  const categories = await categoriesResponse.json();
+  const users = await (await fetch("http://localhost:3000/users")).json();
+  const categories = await (
+    await fetch("http://localhost:3000/categories")
+  ).json();
+
   return [users, categories];
 };
 

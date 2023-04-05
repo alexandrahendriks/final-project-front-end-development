@@ -6,21 +6,23 @@ import { useLoaderData } from "react-router-dom";
 
 //Data Loader
 export const loader = async () => {
-  const eventResponse = await fetch(`http://localhost:3000/events/`);
-  const event = await eventResponse.json();
-  const categoriesResponse = await fetch("http://localhost:3000/categories");
-  const categories = await categoriesResponse.json();
-  const usersResponse = await fetch("http://localhost:3000/users");
-  const users = await usersResponse.json();
+  const event = await (await fetch(`http://localhost:3000/events/`)).json();
+  const categories = await (
+    await fetch("http://localhost:3000/categories")
+  ).json();
+  const users = await (await fetch("http://localhost:3000/users")).json();
 
   return [event, categories, users];
 };
 
 export const EventsPage = () => {
   const [event, categories] = useLoaderData();
+
+  //Jump to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <>
       <Heading
