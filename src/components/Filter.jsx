@@ -7,6 +7,7 @@ import { Events } from "./Events";
 export const Filter = ({ events, category }) => {
   //State for the searchfield
   const [searchField, setSearchField] = useState("");
+
   // Filter function and event handler for the searchbar and categories filter
   const matchedEvents = events.filter((event) => {
     return (
@@ -67,10 +68,22 @@ export const Filter = ({ events, category }) => {
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </Button>
             ))}
+            <Button
+              color="white"
+              background="#38A169"
+              _hover={{ background: "#38A169" }}
+              onClick={() => setSearchField("")}
+            >
+              All events
+            </Button>
           </Flex>
         </FormLabel>
 
-        <Events events={matchedEvents} category={category} />
+        {searchField ? (
+          <Events events={matchedEvents} category={category} />
+        ) : (
+          <Events events={events} category={category} />
+        )}
       </Flex>
     </>
   );

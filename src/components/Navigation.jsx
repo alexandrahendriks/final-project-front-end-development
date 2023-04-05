@@ -16,7 +16,7 @@ export const Navigation = () => {
         color="#2F855A"
         fontWeight="bold"
       >
-        <BreadcrumbLink as={Link} to="/">
+        <BreadcrumbLink as={Link} reloadDocument to="/">
           Events
         </BreadcrumbLink>
       </BreadcrumbItem>
@@ -26,7 +26,7 @@ export const Navigation = () => {
         color="#2F855A"
         fontWeight="bold"
       >
-        <BreadcrumbLink as={Link} to="/addevents">
+        <BreadcrumbLink as={Link} reloadDocument to="/addevents">
           Add event
         </BreadcrumbLink>
       </BreadcrumbItem>
