@@ -73,13 +73,16 @@ export const EventPage = () => {
             flexDirection={{ base: "column", md: "row" }}
             columnGap={{ md: 5 }}
             mt={{ base: "50px" }}
+            ml={{ lg: "60px" }}
           >
             <Link to={`/event/${event.id}/editevent`}>
               <Button
                 color="white"
                 background="#38A169"
                 mb={{ base: "10px" }}
-                width="350px"
+                width={{ base: "350px", xl: "450px" }}
+                height={{ xl: "60px" }}
+                fontSize={{ xl: "30px" }}
               >
                 Edit event
               </Button>
@@ -89,12 +92,14 @@ export const EventPage = () => {
               color="white"
               background="#38A169"
               mb={{ base: "20px" }}
-              width="350px"
+              width={{ base: "350px", xl: "450px" }}
+              height={{ xl: "60px" }}
+              fontSize={{ xl: "30px" }}
             >
               Delete Event
             </Button>
           </Flex>
-          <Modal isOpen={isOpen} onClose={onClose}>
+          <Modal isOpen={isOpen} onClose={onClose} size={{ xl: "xl" }}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader color="#2F855A">
