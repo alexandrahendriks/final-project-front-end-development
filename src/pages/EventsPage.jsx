@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from "react";
+import React, { useEffect } from "react";
 import { Heading } from "@chakra-ui/react";
 import { Filter } from "../components/Filter";
 import { useLoaderData } from "react-router-dom";
@@ -18,7 +18,9 @@ export const loader = async () => {
 
 export const EventsPage = () => {
   const [event, categories] = useLoaderData();
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Heading

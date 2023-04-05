@@ -48,15 +48,19 @@ export const Events = ({ events, category }) => {
                   height={220}
                   borderTopRadius="10px"
                 />
-                <Heading fontSize={"25px"} fontWeight={"semibold"}>
+                <Heading
+                  fontSize={"25px"}
+                  fontWeight={"semibold"}
+                  color="#2F855A"
+                >
                   {event.title}
                 </Heading>
-                <Text>{event.description}</Text>
-                <Box>
+                <Text color="#2F855A">{event.description}</Text>
+                <Box color="#2F855A">
                   Start Time: {event.startTime.substring(0, 10)}{" "}
                   {event.startTime.substring(11, 16)}
                 </Box>
-                <Box>
+                <Box color="#2F855A">
                   End Time: {event.endTime.substring(0, 10)}{" "}
                   {event.endTime.substring(11, 16)}
                 </Box>
@@ -76,6 +80,7 @@ export const Events = ({ events, category }) => {
                         backgroundColor="#9AE6B4"
                         borderBottomRadius="3px"
                         borderTopRadius="3px"
+                        color="#22543D"
                       >
                         {category.find((category) => category.id === id)?.name}
                       </Badge>

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { FormLabel, Input, Button, Flex } from "@chakra-ui/react";
@@ -6,7 +7,6 @@ import { Events } from "./Events";
 export const Filter = ({ events, category }) => {
   //State for the searchfield
   const [searchField, setSearchField] = useState("");
-
   // Filter function and event handler for the searchbar and categories filter
   const matchedEvents = events.filter((event) => {
     return (
@@ -17,6 +17,7 @@ export const Filter = ({ events, category }) => {
 
   // Setting value for the input
   const handleChange = (event) => {
+    setSearchField("");
     setSearchField(event.target.value);
   };
 
@@ -62,6 +63,7 @@ export const Filter = ({ events, category }) => {
                 onClick={handleChange}
                 color="white"
                 background="#38A169"
+                _hover={{ background: "#38A169" }}
               >
                 {name.charAt(0).toUpperCase() + name.slice(1)}
               </Button>

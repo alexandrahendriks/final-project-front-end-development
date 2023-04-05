@@ -10,8 +10,9 @@ import {
   Center,
   Heading,
   Flex,
+  Text,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
@@ -33,14 +34,18 @@ export const AddEvents = () => {
   const history = useNavigate();
 
   // React-hook-form
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   //const onSubmit = (data) => console.log(data);
 
   // onSubmit POST request to the backend
   const onSubmit = async (data) => {
     setIsPending(true);
-    await fetch("http://localhost:3000/events", {
+    const response = await fetch("http://localhost:3000/events", {
       method: "POST",
       body: JSON.stringify({
         createdBy: Number(data.createdBy),
@@ -54,12 +59,33 @@ export const AddEvents = () => {
         endTime: data.endTime + ":00.000Z",
       }),
       headers: { "Content-type": "application/json" },
-    }).then(() => {
-      setIsPending(false);
-      history("/");
     });
+    if (response.ok) {
+      setIsPending(false);
+      toast({
+        title: "Event added",
+        description: "We have successfully created the event for you!",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+      history("/");
+    } else {
+      toast({
+        title: "Adding the event wasn't successful",
+        description: "Something went wrong!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+        position: "top",
+      });
+      setIsPending(false);
+    }
   };
-
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   // useToast declaration for pop up message
   const toast = useToast();
 
@@ -87,8 +113,13 @@ export const AddEvents = () => {
               backgroundColor="white"
               focusBorderColor="#38A169"
               type="text"
-              {...register("title", { required: true, min: 3 })}
+              {...register("title", { required: true })}
             />
+            {errors.title && errors.title.type === "required" && (
+              <Text mt={"8px"} color="red">
+                This field is required!
+              </Text>
+            )}
           </FormLabel>
           <FormLabel
             mb={{ base: "20px" }}
@@ -99,14 +130,16 @@ export const AddEvents = () => {
             <Textarea
               mt={{ base: "10px" }}
               backgroundColor="white"
-              colorScheme="whatsapp"
               focusBorderColor="#38A169"
               {...register("description", {
                 required: true,
-                min: 20,
-                maxLength: 400,
               })}
             />
+            {errors.description && errors.description.type === "required" && (
+              <Text mt={"8px"} color="red">
+                This field is required!
+              </Text>
+            )}
           </FormLabel>
           <FormLabel
             mb={{ base: "20px" }}
@@ -117,11 +150,15 @@ export const AddEvents = () => {
             <Input
               mt={{ base: "10px" }}
               backgroundColor="white"
-              colorScheme="whatsapp"
               focusBorderColor="#38A169"
               type="url"
-              {...register("image", {})}
+              {...register("image", { required: true })}
             />
+            {errors.image && errors.image.type === "required" && (
+              <Text mt={"8px"} color="red">
+                This field is required!
+              </Text>
+            )}
           </FormLabel>
           <FormLabel
             mb={{ base: "20px" }}
@@ -132,11 +169,15 @@ export const AddEvents = () => {
             <Input
               mt={{ base: "10px" }}
               backgroundColor="white"
-              colorScheme="whatsapp"
               focusBorderColor="#38A169"
               type="text"
               {...register("location", { required: true })}
             />
+            {errors.location && errors.location.type === "required" && (
+              <Text mt={"8px"} color="red">
+                This field is required!
+              </Text>
+            )}
           </FormLabel>
           <FormLabel
             mb={{ base: "20px" }}
@@ -152,6 +193,11 @@ export const AddEvents = () => {
               type="datetime-local"
               {...register("startTime", { required: true })}
             />
+            {errors.startTime && errors.startTime.type === "required" && (
+              <Text mt={"8px"} color="red">
+                This field is required!
+              </Text>
+            )}
           </FormLabel>
           <FormLabel
             mb={{ base: "20px" }}
@@ -167,6 +213,11 @@ export const AddEvents = () => {
               type="datetime-local"
               {...register("endTime", { required: true })}
             />
+            {errors.endTime && errors.endTime.type === "required" && (
+              <Text mt={"8px"} color="red">
+                This field is required!
+              </Text>
+            )}
           </FormLabel>
 
           <FormLabel
@@ -187,7 +238,7 @@ export const AddEvents = () => {
                     type="checkbox"
                     id={id}
                     value={id}
-                    {...register("categoryIds", { required: true })}
+                    {...register("categoryIds", {})}
                   />
                 </FormLabel>
               ))}
@@ -250,17 +301,6 @@ export const AddEvents = () => {
           ) : (
             <Button
               type="submit"
-              onClick={() =>
-                toast({
-                  title: "Event added",
-                  description:
-                    "We have successfully created the event for you!",
-                  status: "success",
-                  duration: 9000,
-                  isClosable: true,
-                  position: "top",
-                })
-              }
               color="white"
               background="#38A169"
               mb={{ base: "20px" }}
