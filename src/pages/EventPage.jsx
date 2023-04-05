@@ -16,6 +16,7 @@ import React, { useEffect } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { Event } from "../components/Event";
 
+//Data loader
 export const loader = async ({ params }) => {
   const eventResponse = await fetch(
     `http://localhost:3000/events/${params.eventId}`
@@ -31,9 +32,17 @@ export const loader = async ({ params }) => {
 
 export const EventPage = () => {
   const [event, categories, users] = useLoaderData();
+
+  //Navigation hook
   const history = useNavigate();
+
+  //Pop up message hook
   const toast = useToast();
+
+  //Modal actions
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  //Delete request
   const handleDelete = async () => {
     const response = await fetch(`http://localhost:3000/events/` + event.id, {
       method: "DELETE",
@@ -60,29 +69,29 @@ export const EventPage = () => {
     }
   };
 
+  // Jump to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   return (
     <>
-      <Center display={"flex"} flexDir={"column"} rowGap={5}>
-        <Flex flexDirection={{ base: "column" }}>
+      <Center display="flex" flexDir="column" rowGap={5}>
+        <Flex flexDirection="column">
           <Event event={event} category={categories} users={users} />
           <Flex
-            display={"flex"}
+            display="flex"
             flexDirection={{ base: "column", md: "row" }}
             columnGap={{ md: 5 }}
-            mt={{ base: "50px" }}
-            ml={{ lg: "60px" }}
+            mt="50px"
+            ml={{ lg: "150px" }}
           >
             <Link to={`/event/${event.id}/editevent`}>
               <Button
                 color="white"
                 background="#38A169"
-                mb={{ base: "10px" }}
-                width={{ base: "350px", xl: "450px" }}
-                height={{ xl: "60px" }}
-                fontSize={{ xl: "30px" }}
+                mb="10px"
+                width={{ base: "350px", xl: "400px" }}
+                fontSize={{ xl: "25px" }}
               >
                 Edit event
               </Button>
@@ -91,10 +100,9 @@ export const EventPage = () => {
               onClick={onOpen}
               color="white"
               background="#38A169"
-              mb={{ base: "20px" }}
-              width={{ base: "350px", xl: "450px" }}
-              height={{ xl: "60px" }}
-              fontSize={{ xl: "30px" }}
+              mb="20px"
+              width={{ base: "350px", xl: "400px" }}
+              fontSize={{ xl: "25px" }}
             >
               Delete Event
             </Button>
@@ -106,12 +114,12 @@ export const EventPage = () => {
                 Are you sure you would like to delete this event?
               </ModalHeader>
               <ModalCloseButton />
-              <ModalFooter display={"flex"}>
+              <ModalFooter display="flex">
                 <Button
                   onClick={handleDelete}
                   color="white"
                   background="#38A169"
-                  mb={{ base: "20px" }}
+                  mb="20px"
                   mr="10px"
                 >
                   Yes
@@ -120,7 +128,7 @@ export const EventPage = () => {
                   onClick={onClose}
                   color="white"
                   background="#C53030"
-                  mb={{ base: "20px" }}
+                  mb="20px"
                 >
                   No
                 </Button>

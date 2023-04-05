@@ -83,6 +83,8 @@ export const AddEvents = () => {
       setIsPending(false);
     }
   };
+
+  //Jump to the top of the page
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -91,44 +93,36 @@ export const AddEvents = () => {
 
   return (
     <>
-      <Center display={"flex"} flexDirection={"column"} ml={{ base: "10px" }}>
+      <Center display="flex" flexDirection="column" ml="10px">
         <Heading
           mb="40px"
           mt="30px"
           color="#2F855A"
           fontSize={{ base: "30px", md: "50px", xl: "60px" }}
-          fontFamily={"Times new roman"}
+          fontFamily="Times new roman"
         >
           Add a new event
         </Heading>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Title of the event:
             <Input
-              mt={{ base: "10px" }}
+              mt="10px"
               backgroundColor="white"
               focusBorderColor="#38A169"
               type="text"
               {...register("title", { required: true })}
             />
             {errors.title && errors.title.type === "required" && (
-              <Text mt={"8px"} color="red">
+              <Text mt="8px" color="red">
                 This field is required!
               </Text>
             )}
           </FormLabel>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Description of the event:
             <Textarea
-              mt={{ base: "10px" }}
+              mt="10px"
               backgroundColor="white"
               focusBorderColor="#38A169"
               {...register("description", {
@@ -136,57 +130,45 @@ export const AddEvents = () => {
               })}
             />
             {errors.description && errors.description.type === "required" && (
-              <Text mt={"8px"} color="red">
+              <Text mt="8px" color="red">
                 This field is required!
               </Text>
             )}
           </FormLabel>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Image of the event in URL form:
             <Input
-              mt={{ base: "10px" }}
+              mt="10px"
               backgroundColor="white"
               focusBorderColor="#38A169"
               type="url"
               {...register("image", { required: true })}
             />
             {errors.image && errors.image.type === "required" && (
-              <Text mt={"8px"} color="red">
+              <Text mt="8px" color="red">
                 This field is required!
               </Text>
             )}
           </FormLabel>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Location of the event:
             <Input
-              mt={{ base: "10px" }}
+              mt="10px"
               backgroundColor="white"
               focusBorderColor="#38A169"
               type="text"
               {...register("location", { required: true })}
             />
             {errors.location && errors.location.type === "required" && (
-              <Text mt={"8px"} color="red">
+              <Text mt="8px" color="red">
                 This field is required!
               </Text>
             )}
           </FormLabel>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Start time:
             <Input
-              mt={{ base: "10px" }}
+              mt="10px"
               color="black"
               backgroundColor="white"
               focusBorderColor="#38A169"
@@ -194,19 +176,15 @@ export const AddEvents = () => {
               {...register("startTime", { required: true })}
             />
             {errors.startTime && errors.startTime.type === "required" && (
-              <Text mt={"8px"} color="red">
+              <Text mt="8px" color="red">
                 This field is required!
               </Text>
             )}
           </FormLabel>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             End time:
             <Input
-              mt={{ base: "10px" }}
+              mt="10px"
               color="black"
               backgroundColor="white"
               focusBorderColor="#38A169"
@@ -214,25 +192,21 @@ export const AddEvents = () => {
               {...register("endTime", { required: true })}
             />
             {errors.endTime && errors.endTime.type === "required" && (
-              <Text mt={"8px"} color="red">
+              <Text mt="8px" color="red">
                 This field is required!
               </Text>
             )}
           </FormLabel>
 
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Catgeories:
-            <Flex mt={{ base: "10px" }}>
+            <Flex mt="10px">
               {categories.map(({ name, id }) => (
-                <FormLabel color="#2F855A" fontSize={{ base: "17px" }} key={id}>
+                <FormLabel color="#2F855A" fontSize="17px" key={id}>
                   {name.charAt(0).toUpperCase() + name.slice(1)}
                   <Checkbox
-                    ml={"10px"}
-                    mt={"5px"}
+                    ml="10px"
+                    mt="5px"
                     backgroundColor="white"
                     colorScheme="whatsapp"
                     type="checkbox"
@@ -244,19 +218,15 @@ export const AddEvents = () => {
               ))}
             </Flex>
           </FormLabel>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Attended by:
-            <Flex mt={{ base: "10px" }}>
+            <Flex mt="10px">
               {users.map(({ name, id }) => (
-                <FormLabel color="#2F855A" fontSize={{ base: "17px" }} key={id}>
+                <FormLabel color="#2F855A" fontSize="17px" key={id}>
                   {name}
                   <Checkbox
-                    ml={"10px"}
-                    mt={"5px"}
+                    ml="10px"
+                    mt="5px"
                     backgroundColor="white"
                     colorScheme="whatsapp"
                     type="checkbox"
@@ -268,14 +238,10 @@ export const AddEvents = () => {
               ))}
             </Flex>
           </FormLabel>
-          <FormLabel
-            mb={{ base: "20px" }}
-            fontSize={{ base: "20px" }}
-            color="#2F855A"
-          >
+          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Created by:
             <Select
-              mt={{ base: "10px" }}
+              mt="10px"
               color="black"
               backgroundColor="white"
               focusBorderColor="#38A169"
@@ -294,7 +260,8 @@ export const AddEvents = () => {
               disabled
               color="white"
               background="#38A169"
-              mb={{ base: "20px" }}
+              mb="20px"
+              width={{ lg: "150px" }}
             >
               Adding event...
             </Button>
@@ -303,7 +270,8 @@ export const AddEvents = () => {
               type="submit"
               color="white"
               background="#38A169"
-              mb={{ base: "20px" }}
+              mb="20px"
+              width={{ lg: "150px" }}
             >
               Add event
             </Button>

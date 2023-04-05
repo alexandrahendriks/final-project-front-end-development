@@ -24,12 +24,12 @@ export const Events = ({ events, category }) => {
             marginBottom="20px"
             borderTopRadius="10px"
             borderBottomRadius="10px"
-            maxWidth={{ base: "300px" }}
+            maxWidth="300px"
             flexBasis="300px"
             grow="1"
             shrink="0"
             _hover={{ boxShadow: "0 0 20px rgba(33,33,33,.2)" }}
-            transition={"box-shadow .3s"}
+            transition="box-shadow .3s"
             border="1px"
             borderColor="#38A169"
             key={event.id}
@@ -48,20 +48,16 @@ export const Events = ({ events, category }) => {
                   height={220}
                   borderTopRadius="10px"
                 />
-                <Heading
-                  fontSize={"25px"}
-                  fontWeight={"semibold"}
-                  color="#2F855A"
-                >
+                <Heading fontSize="25px" fontWeight="semibold" color="#2F855A">
                   {event.title}
                 </Heading>
                 <Text color="#2F855A">{event.description}</Text>
                 <Box color="#2F855A">
-                  Start Time: {event.startTime.substring(0, 10)}{" "}
+                  Start Time: {event.startTime.substring(0, 10)}
                   {event.startTime.substring(11, 16)}
                 </Box>
                 <Box color="#2F855A">
-                  End Time: {event.endTime.substring(0, 10)}{" "}
+                  End Time: {event.endTime.substring(0, 10)}
                   {event.endTime.substring(11, 16)}
                 </Box>
                 <Box
@@ -96,6 +92,7 @@ export const Events = ({ events, category }) => {
   );
 };
 
+//Prop validation
 Events.propTypes = {
   events: PropTypes.array,
   category: PropTypes.array,

@@ -17,7 +17,6 @@ export const Filter = ({ events, category }) => {
 
   // Setting value for the input
   const handleChange = (event) => {
-    setSearchField("");
     setSearchField(event.target.value);
   };
 
@@ -77,6 +76,7 @@ export const Filter = ({ events, category }) => {
   );
 };
 
+//Prop validation
 Filter.propTypes = {
   events: PropTypes.array,
   category: PropTypes.array,
