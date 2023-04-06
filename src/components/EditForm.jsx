@@ -168,8 +168,9 @@ export const EditForm = () => {
             <Input
               type="datetime-local"
               name="startTime"
-              value={new Date(userEvent.startTime).toISOString().slice(0, 16)}
+              value={userEvent.startTime}
               onChange={handleChange}
+              required
               mt="10px"
               backgroundColor="white"
               focusBorderColor="#38A169"
@@ -180,13 +181,12 @@ export const EditForm = () => {
             <Input
               name="endTime"
               type="datetime-local"
-              defaultValue={new Date(userEvent.endTime)
-                .toISOString()
-                .slice(0, 16)}
+              value={userEvent.location}
               onChange={handleChange}
               mt="10px"
               backgroundColor="white"
               focusBorderColor="#38A169"
+              required
             />
           </FormLabel>
 
