@@ -15,6 +15,7 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { Header } from "./Header";
+
 // loader function to get users and categories data for the form
 export const loader = async () => {
   const users = await (await fetch("http://localhost:3000/users")).json();
@@ -55,8 +56,8 @@ export const AddEvents = () => {
         categoryIds: data.categoryIds.map((id) => parseInt(id)),
         attendedBy: data.attendedBy.map((id) => parseInt(id)),
         location: data.location,
-        startTime: data.startTime + ":00.000Z",
-        endTime: data.endTime + ":00.000Z",
+        startTime: data.startTime,
+        endTime: data.endTime,
       }),
       headers: { "Content-type": "application/json" },
     });
