@@ -49,8 +49,8 @@ export const EventPage = () => {
     });
     if (response.ok) {
       toast({
-        title: "Event updated",
-        description: "We have successfully edited the event for you!",
+        title: "Delete event",
+        description: "We have successfully deleted the event!",
         status: "success",
         duration: 5000,
         isClosable: true,
@@ -59,7 +59,7 @@ export const EventPage = () => {
       history("/");
     } else {
       toast({
-        title: "Event updated",
+        title: "Event wasn't deleted",
         description: "Something went wrong!",
         status: "error",
         duration: 9000,
@@ -81,6 +81,7 @@ export const EventPage = () => {
           <Flex
             display="flex"
             flexDirection={{ base: "column", md: "row" }}
+            alignItems={"center"}
             columnGap={{ md: 5 }}
             mt="50px"
             ml={{ lg: "150px", xl: "230px" }}

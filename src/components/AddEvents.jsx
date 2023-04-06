@@ -67,7 +67,7 @@ export const AddEvents = () => {
         title: "Event added",
         description: "We have successfully created the event for you!",
         status: "success",
-        duration: 9000,
+        duration: 10000,
         isClosable: true,
         position: "top",
       });

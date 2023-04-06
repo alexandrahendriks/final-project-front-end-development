@@ -63,7 +63,7 @@ export const EditForm = () => {
       history(`/event/${userEvent.id}`);
     } else {
       toast({
-        title: "Event updated",
+        title: "Event didn't update",
         description: "Something went wrong!",
         status: "error",
         duration: 9000,
@@ -94,7 +94,6 @@ export const EditForm = () => {
 
   //Handlechange function for the input fields
   const handleChange = (e) => {
-    console.log(e.target.value);
     setUserEvent({ ...userEvent, [e.target.name]: e.target.value });
     console.log(userEvent);
   };
