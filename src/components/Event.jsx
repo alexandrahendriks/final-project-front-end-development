@@ -2,6 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Center, Flex, Heading, Image, Text, Badge } from "@chakra-ui/react";
+import { Header } from "./Header";
 
 export const Event = ({ event, category, users }) => {
   //Match user with createdBy
@@ -12,19 +13,14 @@ export const Event = ({ event, category, users }) => {
   return (
     <>
       <Center display="flex" flexDir="column">
-        <Heading
-          textAlign="center"
-          mb={{ base: "50px", xl: "80px" }}
-          mt={{ base: "50px", md: "70px" }}
-          color="#2F855A"
-          fontSize={{ base: "40px", md: "50px", xl: "60px" }}
-          fontFamily={("Times new roman", "serif")}
-        >
-          {event.title}
-        </Heading>
+        <Header title={event.title} />
 
         <Flex display="flex" flexDir="column">
-          <Flex flexDir={{ base: "column", lg: "row" }} columnGap={50}>
+          <Flex
+            flexDir={{ base: "column", lg: "row" }}
+            columnGap={50}
+            mt={{ base: "50px", md: "60px" }}
+          >
             <Image
               src={event.image}
               alt={event.title}

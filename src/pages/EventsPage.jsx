@@ -1,8 +1,8 @@
 // @ts-nocheck
 import React, { useEffect } from "react";
-import { Heading } from "@chakra-ui/react";
 import { Filter } from "../components/Filter";
 import { useLoaderData } from "react-router-dom";
+import { Header } from "../components/Header";
 
 //Data Loader
 export const loader = async () => {
@@ -25,16 +25,7 @@ export const EventsPage = () => {
 
   return (
     <>
-      <Heading
-        textAlign="center"
-        mb="30px"
-        mt="30px"
-        color="#2F855A"
-        fontSize={{ base: "40px", md: "50px", xl: "60px" }}
-        fontFamily={("Times new roman", "serif")}
-      >
-        All events
-      </Heading>
+      <Header title={"All events"} />
       <Filter events={event} category={categories} />
     </>
   );

@@ -1,8 +1,10 @@
 // @ts-nocheck
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { FormLabel, Input, Button, Flex } from "@chakra-ui/react";
+import { FormLabel, Flex } from "@chakra-ui/react";
 import { Events } from "./Events";
+import { SearchBar } from "./SearchBar";
+import { FilterButton } from "./FilterButton";
 
 export const Filter = ({ events, category }) => {
   //State for the searchfield
@@ -29,21 +31,7 @@ export const Filter = ({ events, category }) => {
         alignItems="center"
         justify="center"
       >
-        <Input
-          backgroundColor="white"
-          focusBorderColor="#38A169"
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
-          p="10px"
-          mb={{ base: "30px", md: "35px" }}
-          ml="5px"
-          width={{ base: "300px", sm: "350px", md: "400px" }}
-          type="text"
-          placeholder="Search here for events"
-          onChange={handleChange}
-        />
-
+        <SearchBar onChange={handleChange} />
         <FormLabel
           display="flex"
           flexDirection="column"
@@ -57,25 +45,17 @@ export const Filter = ({ events, category }) => {
           Filter on category:
           <Flex display="flex" flexDirection="row" columnGap={5}>
             {category.map(({ name, id }) => (
-              <Button
+              <FilterButton
                 key={id}
                 value={id}
                 onClick={handleChange}
-                color="white"
-                background="#38A169"
-                _hover={{ background: "#38A169" }}
-              >
-                {name.charAt(0).toUpperCase() + name.slice(1)}
-              </Button>
+                title={name.charAt(0).toUpperCase() + name.slice(1)}
+              />
             ))}
-            <Button
-              color="white"
-              background="#38A169"
-              _hover={{ background: "#38A169" }}
+            <FilterButton
               onClick={() => setSearchField("")}
-            >
-              All events
-            </Button>
+              title={"All events"}
+            />
           </Flex>
         </FormLabel>
 

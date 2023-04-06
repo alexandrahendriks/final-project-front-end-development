@@ -15,6 +15,7 @@ import {
 import React, { useEffect } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
 import { Event } from "../components/Event";
+import { Buttons } from "../components/Buttons";
 
 //Data loader
 export const loader = async ({ params }) => {
@@ -75,36 +76,21 @@ export const EventPage = () => {
   return (
     <>
       <Center display="flex" flexDir="column" rowGap={5}>
-        <Flex flexDirection="column">
+        <Flex direction="column">
           <Event event={event} category={categories} users={users} />
           <Flex
             display="flex"
             flexDirection={{ base: "column", md: "row" }}
             columnGap={{ md: 5 }}
             mt="50px"
-            ml={{ lg: "150px" }}
+            ml={{ lg: "110px", xl: "150px" }}
           >
             <Link to={`/event/${event.id}/editevent`}>
-              <Button
-                color="white"
-                background="#38A169"
-                mb="10px"
-                width={{ base: "350px", xl: "400px" }}
-                fontSize={{ xl: "25px" }}
-              >
-                Edit event
-              </Button>
+              <Buttons title={"Edit event"}>Edit event</Buttons>
             </Link>
-            <Button
-              onClick={onOpen}
-              color="white"
-              background="#38A169"
-              mb="20px"
-              width={{ base: "350px", xl: "400px" }}
-              fontSize={{ xl: "25px" }}
-            >
+            <Buttons onClick={onOpen} title={"Delete Event"}>
               Delete Event
-            </Button>
+            </Buttons>
           </Flex>
           <Modal isOpen={isOpen} onClose={onClose} size={{ xl: "xl" }}>
             <ModalOverlay />
