@@ -7,7 +7,7 @@ export const Header = ({ title }) => {
   return (
     <Heading
       textAlign="center"
-      mb="30px"
+      mb="40px"
       mt="30px"
       color="#2F855A"
       fontSize={{ base: "40px", md: "50px", xl: "60px" }}

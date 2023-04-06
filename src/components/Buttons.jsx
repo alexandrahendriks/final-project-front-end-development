@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import React from "react";
 import PropTypes from "prop-types";
 
-export const Buttons = ({ title }) => {
+export const Buttons = ({ title, onClick }) => {
   return (
     <Button
       color="white"
@@ -11,6 +11,7 @@ export const Buttons = ({ title }) => {
       mb="20px"
       width={{ base: "350px", xl: "400px" }}
       fontSize={{ xl: "25px" }}
+      onClick={onClick}
     >
       {title}
     </Button>
@@ -20,4 +21,5 @@ export const Buttons = ({ title }) => {
 //Prop validation
 Buttons.propTypes = {
   title: PropTypes.string,
+  onClick: PropTypes.func,
 };

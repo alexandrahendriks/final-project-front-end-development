@@ -1,8 +1,9 @@
 // @ts-nocheck
 import React from "react";
 import PropTypes from "prop-types";
-import { Center, Flex, Heading, Image, Text, Badge } from "@chakra-ui/react";
+import { Center, Flex, Image, Text, Badge } from "@chakra-ui/react";
 import { Header } from "./Header";
+import { Title } from "./Title";
 
 export const Event = ({ event, category, users }) => {
   //Match user with createdBy
@@ -20,6 +21,7 @@ export const Event = ({ event, category, users }) => {
             flexDir={{ base: "column", lg: "row" }}
             columnGap={50}
             mt={{ base: "50px", md: "60px" }}
+            mb="20px"
           >
             <Image
               src={event.image}
@@ -31,14 +33,7 @@ export const Event = ({ event, category, users }) => {
             />
             <Flex flexDir="column" ml="5px" mt="20px">
               <Flex flexDir="column">
-                <Heading
-                  color="#2F855A"
-                  fontSize={{ base: "25px", md: "30px", xl: "40px" }}
-                  fontFamily={("Times new roman", "serif")}
-                  mb={{ base: "10px", md: "15px", xl: "25px" }}
-                >
-                  Event description:
-                </Heading>
+                <Title title={"Event description:"} />
                 <Text
                   color="#2F855A"
                   fontSize={{ base: "20px", md: "25px", xl: "30px" }}
@@ -59,16 +54,8 @@ export const Event = ({ event, category, users }) => {
                 </Text>
               </Flex>
               <hr />
-              <Flex flexDir="column" mb="10px">
-                <Heading
-                  color="#2F855A"
-                  fontSize={{ base: "25px", md: "30px", xl: "40px" }}
-                  fontFamily={("Times new roman", "serif")}
-                  mb={{ base: "10px", md: "20px", xl: "30px" }}
-                  mt="10px"
-                >
-                  Category:
-                </Heading>
+              <Flex flexDir="column" mb="10px" mt="20px">
+                <Title title={"Category"} />
                 <Flex columnGap={5}>
                   {event.categoryIds.map((id) => {
                     return (
@@ -94,15 +81,7 @@ export const Event = ({ event, category, users }) => {
             </Flex>
             <hr />
           </Flex>
-          <Heading
-            color="#2F855A"
-            fontSize={{ base: "25px", md: "30px", xl: "40px" }}
-            fontFamily={("Times new roman", "serif")}
-            mb="10px"
-            mt={{ base: "20px", xl: "35px" }}
-          >
-            Event created by:
-          </Heading>
+          <Title title={"Event created by:"} />
           <Flex flexDir="column" alignItems="center" mt="20px">
             <Image
               src={userId.image}

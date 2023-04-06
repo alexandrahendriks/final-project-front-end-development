@@ -75,7 +75,7 @@ export const EventPage = () => {
   }, []);
   return (
     <>
-      <Center display="flex" flexDir="column" rowGap={5}>
+      <Center display="flex" flexDir="column" rowGap={5} ml={{ lg: "20px" }}>
         <Flex direction="column">
           <Event event={event} category={categories} users={users} />
           <Flex
@@ -83,7 +83,7 @@ export const EventPage = () => {
             flexDirection={{ base: "column", md: "row" }}
             columnGap={{ md: 5 }}
             mt="50px"
-            ml={{ lg: "110px", xl: "150px" }}
+            ml={{ lg: "150px", xl: "230px" }}
           >
             <Link to={`/event/${event.id}/editevent`}>
               <Buttons title={"Edit event"}>Edit event</Buttons>
@@ -92,7 +92,7 @@ export const EventPage = () => {
               Delete Event
             </Buttons>
           </Flex>
-          <Modal isOpen={isOpen} onClose={onClose} size={{ xl: "xl" }}>
+          <Modal isOpen={isOpen} onClose={onClose} size={{ lg: "lg" }}>
             <ModalOverlay />
             <ModalContent>
               <ModalHeader color="#2F855A">

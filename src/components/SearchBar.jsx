@@ -24,5 +24,5 @@ export const SearchBar = ({ onChange }) => {
 
 //Prop validation
 SearchBar.propTypes = {
-  onChange: PropTypes.string,
+  onChange: PropTypes.func,
 };

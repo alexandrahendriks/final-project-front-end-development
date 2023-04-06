@@ -1,17 +1,12 @@
 // @ts-nocheck
-import {
-  FormLabel,
-  Input,
-  Button,
-  Textarea,
-  Checkbox,
-  useToast,
-  Center,
-  Heading,
-  Flex,
-} from "@chakra-ui/react";
+import { Button, useToast, Center } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { Link, useLoaderData, useNavigate } from "react-router-dom";
+import { Header } from "./Header";
+import { Label } from "./Label";
+import { DateTime } from "./DateTime";
+import { TextArea } from "./TextArea";
+import { CheckBox } from "./CheckBox";
 
 //Data loader
 export const loader = async ({ params }) => {
@@ -107,110 +102,51 @@ export const EditForm = () => {
   return (
     <>
       <Center display="flex" flexDirection="column" ml="10px">
-        <Heading
-          mb="40px"
-          mt="30px"
-          color="#2F855A"
-          fontSize={{ base: "30px", md: "50px", xl: "60px" }}
-          fontFamily="Times new roman"
-        >
-          Edit your event here
-        </Heading>
+        <Header title={"Edit your event here"} />
         <form onSubmit={handleSubmit}>
-          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
-            Title of the event:
-            <Input
-              name="title"
-              value={userEvent.title}
-              onChange={handleChange}
-              mt="10px"
-              backgroundColor="white"
-              focusBorderColor="#38A169"
-            />
-          </FormLabel>
-          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
-            Description of the event:
-            <Textarea
-              name="description"
-              value={userEvent.description}
-              onChange={handleChange}
-              mt="10px"
-              backgroundColor="white"
-              focusBorderColor="#38A169"
-            />
-          </FormLabel>
-          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
-            Image of the event in URL form:
-            <Input
-              type="url"
-              name="image"
-              value={userEvent.image}
-              onChange={handleChange}
-              mt="10px"
-              backgroundColor="white"
-              focusBorderColor="#38A169"
-            />
-          </FormLabel>
-          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
-            Location of the event:
-            <Input
-              name="location"
-              value={userEvent.location}
-              onChange={handleChange}
-              mt="10px"
-              backgroundColor="white"
-              focusBorderColor="#38A169"
-            />
-          </FormLabel>
+          <Label
+            title={" Title of the event:"}
+            name={"title"}
+            value={userEvent.title}
+            onChange={handleChange}
+          />
+          <TextArea
+            title={" Description of the event:"}
+            name="description"
+            value={userEvent.description}
+            onChange={handleChange}
+          />
+          <Label
+            title={"Image of the event in URL form:"}
+            name="image"
+            value={userEvent.image}
+            onChange={handleChange}
+          />
+          <Label
+            title={"Location of the event:"}
+            name="location"
+            value={userEvent.location}
+            onChange={handleChange}
+          />
+          <DateTime
+            title={"Start time:"}
+            name="startTime"
+            value={userEvent.startTime}
+            onChange={handleChange}
+          />
+          <DateTime
+            title={"End time:"}
+            name="endTime"
+            value={userEvent.endTime}
+            onChange={handleChange}
+          />
+          <CheckBox
+            categories={categories}
+            event={event}
+            title={"Catgeories:"}
+            onChange={handleClick}
+          />
 
-          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
-            Start time:
-            <Input
-              type="datetime-local"
-              name="startTime"
-              value={userEvent.startTime}
-              onChange={handleChange}
-              required
-              mt="10px"
-              backgroundColor="white"
-              focusBorderColor="#38A169"
-            />
-          </FormLabel>
-          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
-            End time:
-            <Input
-              name="endTime"
-              type="datetime-local"
-              value={userEvent.location}
-              onChange={handleChange}
-              mt="10px"
-              backgroundColor="white"
-              focusBorderColor="#38A169"
-              required
-            />
-          </FormLabel>
-
-          <FormLabel mb="20px" fontSize="20px" color="#2F855A">
-            Catgeories:
-            <Flex mt="10px">
-              {categories.map(({ name, id }) => (
-                <FormLabel key={id} color="#2F855A" fontSize="17px">
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
-                  <Checkbox
-                    ml="10px"
-                    mt="5px"
-                    backgroundColor="white"
-                    colorScheme="whatsapp"
-                    type="checkbox"
-                    name={name}
-                    value={id}
-                    defaultChecked={event.categoryIds.includes(id)}
-                    onChange={handleClick}
-                  />
-                </FormLabel>
-              ))}
-            </Flex>
-          </FormLabel>
           {isPending ? (
             <Button
               disabled

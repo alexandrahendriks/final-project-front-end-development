@@ -8,14 +8,13 @@ import {
   Select,
   Textarea,
   Center,
-  Heading,
   Flex,
   Text,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
+import { Header } from "./Header";
 // loader function to get users and categories data for the form
 export const loader = async () => {
   const users = await (await fetch("http://localhost:3000/users")).json();
@@ -95,15 +94,7 @@ export const AddEvents = () => {
   return (
     <>
       <Center display="flex" flexDirection="column" ml="10px">
-        <Heading
-          mb="40px"
-          mt="30px"
-          color="#2F855A"
-          fontSize={{ base: "30px", md: "50px", xl: "60px" }}
-          fontFamily="Times new roman"
-        >
-          Add a new event
-        </Heading>
+        <Header title={"Add a new event"} />
         <form onSubmit={handleSubmit(onSubmit)}>
           <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Title of the event:

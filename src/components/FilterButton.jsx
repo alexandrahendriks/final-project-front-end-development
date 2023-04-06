@@ -3,10 +3,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "@chakra-ui/react";
 
-export const FilterButton = ({ key, value, onClick, title }) => {
+export const FilterButton = ({ keyy, value, onClick, title }) => {
   return (
     <Button
-      key={key}
+      key={keyy}
       value={value}
       onClick={onClick}
       color="white"
@@ -21,8 +21,8 @@ export const FilterButton = ({ key, value, onClick, title }) => {
 //Prop validation
 
 FilterButton.propTypes = {
-  key: PropTypes.number,
+  keyy: PropTypes.number,
   value: PropTypes.number,
-  onClick: PropTypes.number,
+  onClick: PropTypes.func,
   title: PropTypes.string,
 };

@@ -75,6 +75,24 @@
       "location": "Shavasana Yoga School",
       "startTime": "2023-03-09T06:00:00.000Z",
       "endTime": "2023-03-09T07:00:00.000Z"
+    },
+    {
+      "createdBy": 2,
+      "title": "Birthday Party",
+      "description": "Let's celebrate my 30th birthday together.",
+      "image": "https://www.shutterstock.com/image-vector/birthday-balloons-vector-background-design-600w-2003677130.jpg",
+      "categoryIds": [
+        2,
+        1
+      ],
+      "attendedBy": [
+        1,
+        2
+      ],
+      "location": "My home",
+      "startTime": "2023-04-20T14:41",
+      "endTime": "2023-04-27T17:45",
+      "id": 5
     }
   ],
   "categories": [
