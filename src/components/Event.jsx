@@ -54,11 +54,11 @@ export const Event = ({ event, category, users }) => {
               <hr />
               <Flex flexDirection="column" mt="20px" mb="20px" rowGap={2}>
                 <Text color="#2F855A" fontSize={{ md: "20px", xl: "25px" }}>
-                  Start Time: {event.startTime.substring(0, 10)}
+                  Start Time: {event.startTime.substring(0, 10)}{" "}
                   {event.startTime.substring(11, 16)}
                 </Text>
                 <Text color="#2F855A" fontSize={{ md: "20px", xl: "25px" }}>
-                  End Time: {event.endTime.substring(0, 10)}
+                  End Time: {event.endTime.substring(0, 10)}{" "}
                   {event.endTime.substring(11, 16)}
                 </Text>
               </Flex>

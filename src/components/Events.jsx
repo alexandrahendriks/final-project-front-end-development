@@ -53,11 +53,11 @@ export const Events = ({ events, category }) => {
                 </Heading>
                 <Text color="#2F855A">{event.description}</Text>
                 <Box color="#2F855A">
-                  Start Time: {event.startTime.substring(0, 10)}
+                  Start Time: {event.startTime.substring(0, 10)}{" "}
                   {event.startTime.substring(11, 16)}
                 </Box>
                 <Box color="#2F855A">
-                  End Time: {event.endTime.substring(0, 10)}
+                  End Time: {event.endTime.substring(0, 10)}{" "}
                   {event.endTime.substring(11, 16)}
                 </Box>
                 <Box

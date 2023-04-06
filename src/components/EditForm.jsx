@@ -99,6 +99,7 @@ export const EditForm = () => {
 
   //Handlechange function for the input fields
   const handleChange = (e) => {
+    console.log(e.target.value);
     setUserEvent({ ...userEvent, [e.target.name]: e.target.value });
     console.log(userEvent);
   };
@@ -161,6 +162,7 @@ export const EditForm = () => {
               focusBorderColor="#38A169"
             />
           </FormLabel>
+
           <FormLabel mb="20px" fontSize="20px" color="#2F855A">
             Start time:
             <Input
