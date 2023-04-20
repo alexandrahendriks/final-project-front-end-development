@@ -48,40 +48,55 @@ export const Events = ({ events, category }) => {
                   height={220}
                   borderTopRadius="10px"
                 />
-                <Heading fontSize="25px" fontWeight="semibold" color="#2F855A">
-                  {event.title}
-                </Heading>
-                <Text color="#2F855A">{event.description}</Text>
-                <Box color="#2F855A">
-                  Start Time: {event.startTime.substring(0, 10)}{" "}
-                  {event.startTime.substring(11, 16)}
-                </Box>
-                <Box color="#2F855A">
-                  End Time: {event.endTime.substring(0, 10)}{" "}
-                  {event.endTime.substring(11, 16)}
-                </Box>
                 <Box
-                  display="flex"
-                  flexDirection="row"
-                  columnGap="10px"
-                  mb="10px"
-                  mt="5px"
+                  display={"flex"}
+                  flexDirection={"column"}
+                  alignItems={"center"}
+                  justifyContent={"center"}
                 >
-                  {event.categoryIds.map((id) => {
-                    return (
-                      <Badge
-                        key={id}
-                        mb={{ base: "10px" }}
-                        p="5px"
-                        backgroundColor="#9AE6B4"
-                        borderBottomRadius="3px"
-                        borderTopRadius="3px"
-                        color="#22543D"
-                      >
-                        {category.find((category) => category.id === id)?.name}
-                      </Badge>
-                    );
-                  })}
+                  <Heading
+                    fontSize="25px"
+                    fontWeight="semibold"
+                    color="#2F855A"
+                    textAlign={"center"}
+                  >
+                    {event.title}
+                  </Heading>
+                  <Text color="#2F855A">{event.description}</Text>
+                  <Box color="#2F855A">
+                    Start Time: {event.startTime.substring(0, 10)}{" "}
+                    {event.startTime.substring(11, 16)}
+                  </Box>
+                  <Box color="#2F855A">
+                    End Time: {event.endTime.substring(0, 10)}{" "}
+                    {event.endTime.substring(11, 16)}
+                  </Box>
+                  <Box
+                    display="flex"
+                    flexDirection="row"
+                    columnGap="10px"
+                    mb="10px"
+                    mt="5px"
+                  >
+                    {event.categoryIds.map((id) => {
+                      return (
+                        <Badge
+                          key={id}
+                          mb={{ base: "10px" }}
+                          p="5px"
+                          backgroundColor="#9AE6B4"
+                          borderBottomRadius="3px"
+                          borderTopRadius="3px"
+                          color="#22543D"
+                        >
+                          {
+                            category.find((category) => category.id === id)
+                              ?.name
+                          }
+                        </Badge>
+                      );
+                    })}
+                  </Box>
                 </Box>
               </Box>
             </Link>
