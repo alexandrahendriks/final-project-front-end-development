@@ -81,7 +81,7 @@ export const EventPage = () => {
           <Flex
             display="flex"
             flexDirection={{ base: "column", md: "row" }}
-            alignItems={"center"}
+            justifyContent={"center"}
             columnGap={{ md: 5 }}
             mt="50px"
             ml={{ lg: "150px", xl: "230px" }}
